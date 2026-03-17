@@ -53,9 +53,7 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 sh """
-                    python3 -m venv .venv
-                    . .venv/bin/activate
-                    pip install -q -r api_auto/requirements.txt
+                    pip install --break-system-packages -q -r api_auto/requirements.txt
                     cd api_auto && BASE_URL=${env.STAGING_URL} pytest -m smoke -v --tb=short
                 """
             }
