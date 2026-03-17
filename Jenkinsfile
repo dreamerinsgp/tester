@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        PATH = "/usr/bin:/usr/local/bin:${env.PATH}"
         KUBECONFIG = "${env.HOME}/.jenkins/kubeconfig"
         STAGING_URL = 'http://47.238.30.242:30080'
     }
