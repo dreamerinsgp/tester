@@ -4,7 +4,7 @@ pipeline {
     environment {
         PATH = "/usr/bin:/usr/local/bin:${env.PATH}"
         KUBECONFIG = "${env.HOME}/.jenkins/kubeconfig"
-        STAGING_URL = 'http://47.238.30.242:30080'
+        STAGING_URL = 'http://8.217.228.180:30080'
     }
 
     stages {
@@ -53,6 +53,8 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 sh """
+                    python3 -m venv .venv
+                    . .venv/bin/activate
                     pip install -q -r api_auto/requirements.txt
                     cd api_auto && BASE_URL=${env.STAGING_URL} pytest -m smoke -v --tb=short
                 """
